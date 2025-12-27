@@ -1,14 +1,17 @@
 const express = require("express");
+const userRoutes = require("./routes/userRoutes");
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5001;
 
+// parse JSON bodies
 app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("API IS RUNNING");
 });
 
-app.use("/api/users", require("./routes/userRoutes"));
+// mount routes
+app.use("/api/users", userRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
